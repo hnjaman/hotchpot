@@ -2,12 +2,18 @@ package com.lighthouse.resultautomation.service.impl;
 
 import com.lighthouse.resultautomation.model.User;
 import com.lighthouse.resultautomation.model.request.SignUpRequest;
+import com.lighthouse.resultautomation.model.response.LoginResponse;
 import com.lighthouse.resultautomation.repository.UserRepository;
 import com.lighthouse.resultautomation.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -40,5 +46,28 @@ public class AuthServiceImpl implements AuthService {
             return SUCCESS;
         }
         return ALREADY_EXISTS;
+    }
+
+    @Override
+    public LoginResponse getUserInfo(String email) {
+        User user = userRepository.findByEmail(email).get();
+        return LoginResponse.builder()
+                .email(user.getEmail())
+                .name(user.getName())
+                .userName(user.getUserName())
+                .build();
+    }
+
+    @Override
+    public List<LoginResponse> getAllUser() {
+        List<User> users = userRepository.findAll();
+        List<LoginResponse> loginResponseList = users.stream().map(user -> {
+            return LoginResponse.builder()
+                    .name(user.getName())
+                    .email(user.getEmail())
+                    .userName(user.getUserName())
+                    .build();
+        }).collect(Collectors.toList());
+        return loginResponseList;
     }
 }

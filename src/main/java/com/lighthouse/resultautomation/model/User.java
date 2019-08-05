@@ -5,10 +5,12 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name= "user", schema = "result_automation")
 @Builder
+@AllArgsConstructor
 public class User {
 
 	@Id
