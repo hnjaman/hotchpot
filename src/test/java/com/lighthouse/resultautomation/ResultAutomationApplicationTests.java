@@ -17,19 +17,19 @@ import java.util.Optional;
 @SpringBootTest
 public class ResultAutomationApplicationTests {
 
-//	@Autowired
-//	private AuthService authService;
-//
-//	@MockBean
-//	private UserRepository userRepository;
-//
-//	@Test
-//	public void signUpTest() {
+	@Autowired
+	private AuthService authService;
+
+	@MockBean
+	private UserRepository userRepository;
+
+	@Test
+	public void signUpTest() {
 //		String email = "hnj@gmail.com";
 //		Optional<User> found = userRepository.findByEmail(email);
 //
 //		org.junit.Assert.(found.get().getEmail())
 //				.isEqualTo(email);
 //		Assert.notNull(oil, "oil mustn't be null");
-//	}
+	}
 }
