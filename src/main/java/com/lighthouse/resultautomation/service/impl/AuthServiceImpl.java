@@ -8,6 +8,7 @@ import com.lighthouse.resultautomation.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class AuthServiceImpl implements AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Transactional
     @Override
     public String signUp(SignUpRequest signUpRequest) {
         Optional<User> checkedUser = userRepository.findByEmail(signUpRequest.getEmail());

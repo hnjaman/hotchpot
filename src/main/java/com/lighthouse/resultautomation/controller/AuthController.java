@@ -1,12 +1,12 @@
 package com.lighthouse.resultautomation.controller;
 
-import com.lighthouse.resultautomation.model.User;
 import com.lighthouse.resultautomation.model.request.SignUpRequest;
 import com.lighthouse.resultautomation.model.response.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.lighthouse.resultautomation.service.AuthService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,7 +20,7 @@ public class AuthController {
 	}
 	
 	@PostMapping("/signup")
-	public String signUp(@RequestBody SignUpRequest signUpRequest) {
+	public String signUp(@Valid @RequestBody SignUpRequest signUpRequest) {
 		String result = authService.signUp(signUpRequest);
 		return result;
 	}
