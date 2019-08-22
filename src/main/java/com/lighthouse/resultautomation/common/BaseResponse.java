@@ -2,12 +2,14 @@ package com.lighthouse.resultautomation.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lighthouse.resultautomation.common.enums.ResponseType;
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Collection;
 
 @Data
+@Builder
 public class BaseResponse implements Serializable {
     private static final long serialVersionUID = 1546524853123L;
 

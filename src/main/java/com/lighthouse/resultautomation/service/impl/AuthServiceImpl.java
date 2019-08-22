@@ -1,20 +1,23 @@
 package com.lighthouse.resultautomation.service.impl;
 
 import com.lighthouse.resultautomation.model.User;
+import com.lighthouse.resultautomation.model.request.LoginRequest;
 import com.lighthouse.resultautomation.model.request.SignUpRequest;
+import com.lighthouse.resultautomation.model.response.LogInResponseDto;
 import com.lighthouse.resultautomation.model.response.LoginResponse;
+import com.lighthouse.resultautomation.model.response.TokenDTO;
 import com.lighthouse.resultautomation.repository.UserRepository;
 import com.lighthouse.resultautomation.service.AuthService;
+import com.lighthouse.resultautomation.service.JwtTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -24,12 +27,15 @@ public class AuthServiceImpl implements AuthService {
 
     private UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private JwtTokenService jwtTokenService;
 
     @Autowired
     public AuthServiceImpl(UserRepository userRepository,
-                           PasswordEncoder passwordEncoder) {
+                           PasswordEncoder passwordEncoder,
+                           JwtTokenService jwtTokenService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtTokenService = jwtTokenService;
     }
 
     @Transactional
@@ -71,5 +77,11 @@ public class AuthServiceImpl implements AuthService {
                     .build();
         }).collect(Collectors.toList());
         return loginResponseList;
+    }
+
+    @Override
+    public TokenDTO login(LoginResponse loginResponse) {
+        TokenDTO tokenDTO = jwtTokenService.getTokens(loginResponse);
+        return tokenDTO;
     }
 }
