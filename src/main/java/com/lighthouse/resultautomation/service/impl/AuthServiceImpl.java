@@ -1,11 +1,10 @@
 package com.lighthouse.resultautomation.service.impl;
 
 import com.lighthouse.resultautomation.model.User;
-import com.lighthouse.resultautomation.model.request.LoginRequest;
 import com.lighthouse.resultautomation.model.request.SignUpRequest;
-import com.lighthouse.resultautomation.model.response.LogInResponseDto;
 import com.lighthouse.resultautomation.model.response.LoginResponse;
 import com.lighthouse.resultautomation.model.response.TokenDTO;
+import com.lighthouse.resultautomation.repository.UserElasticRepository;
 import com.lighthouse.resultautomation.repository.UserRepository;
 import com.lighthouse.resultautomation.service.AuthService;
 import com.lighthouse.resultautomation.service.JwtTokenService;
@@ -15,9 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -28,14 +25,16 @@ public class AuthServiceImpl implements AuthService {
     private UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private JwtTokenService jwtTokenService;
+    private final UserElasticRepository userElasticRepository;
 
     @Autowired
     public AuthServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder,
-                           JwtTokenService jwtTokenService) {
+                           JwtTokenService jwtTokenService, UserElasticRepository userElasticRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtTokenService = jwtTokenService;
+        this.userElasticRepository = userElasticRepository;
     }
 
     @Transactional
