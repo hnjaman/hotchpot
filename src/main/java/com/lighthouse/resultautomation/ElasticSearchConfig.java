@@ -33,15 +33,15 @@ public class ElasticSearchConfig {
 
         TransportClient client = new PreBuiltTransportClient(elasticsearchSettings);
         try {
-            client.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
+           // client.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return client;
     }
 
-    @Bean
-    public ElasticsearchOperations elasticsearchTemplate() {
-        return new ElasticsearchTemplate(client());
-    }
+//    @Bean
+//    public ElasticsearchOperations elasticsearchTemplate() {
+//        return new ElasticsearchTemplate(client());
+//    }
 }

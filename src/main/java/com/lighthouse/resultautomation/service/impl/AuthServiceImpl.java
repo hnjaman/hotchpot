@@ -25,16 +25,16 @@ public class AuthServiceImpl implements AuthService {
     private UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private JwtTokenService jwtTokenService;
-    private final UserElasticRepository userElasticRepository;
+    //private final UserElasticRepository userElasticRepository;
 
     @Autowired
     public AuthServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder,
-                           JwtTokenService jwtTokenService, UserElasticRepository userElasticRepository) {
+                           JwtTokenService jwtTokenService/* UserElasticRepository userElasticRepository*/) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtTokenService = jwtTokenService;
-        this.userElasticRepository = userElasticRepository;
+      //  this.userElasticRepository = userElasticRepository;
     }
 
     @Transactional
