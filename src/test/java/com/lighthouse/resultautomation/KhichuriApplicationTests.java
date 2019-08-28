@@ -18,8 +18,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Assert;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ResultAutomationApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ResultAutomationApplicationTests {
+@SpringBootTest(classes = KhichuriApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class KhichuriApplicationTests {
 	@Autowired
 	private AuthService authService;
 	@MockBean
