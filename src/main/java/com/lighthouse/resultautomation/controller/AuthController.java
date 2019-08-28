@@ -39,16 +39,13 @@ import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
 @RestController
 public class AuthController {
 
-	private RedisUserRepository redisUserRepository;
 	AuthService authService;
 	Client client;
 
 	@Autowired
 	public AuthController(AuthService authService,
-						  RedisUserRepository redisUserRepository,
 						  Client client) {
 		this.authService = authService;
-		this.redisUserRepository = redisUserRepository;
 		this.client = client;
 	}
 	
@@ -73,29 +70,6 @@ public class AuthController {
 	public List<LoginResponse> getAllUser(){
 		List<LoginResponse> result = authService.getAllUser();
 		return result;
-	}
-
-	// Redis cache checking
-
-	@PostMapping("/redis-users")
-	public SignUpRequest save(@RequestBody SignUpRequest signUpRequest){
-		redisUserRepository.save(signUpRequest);
-		return signUpRequest;
-	}
-
-	@GetMapping("/redis-users")
-//	@Cacheable(value = "users", key = "#userId")
-	public List list(){
-		return redisUserRepository.findAll();
-	}
-
-	@PostMapping(ApiEndPoints.LOG_IN)
-	public BaseResponse login(@Valid @RequestBody LoginResponse loginResponse){
-		TokenDTO tokenDTO =  authService.login(loginResponse);
-		return BaseResponse.builder()
-				.responseType(RESULT)
-				.result(tokenDTO)
-				.build();
 	}
 
 	@PostMapping("/create")

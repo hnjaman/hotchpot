@@ -59,7 +59,7 @@ public class JwtTokenServiceImpl implements JwtTokenService {
                 .setIssuer("admin")
                 .setIssuedAt(Date.from(currentTime.toInstant()))
                 .setExpiration(Date.from(currentTime
-                        .plusSeconds(1000)
+                        .plusSeconds(60)
                         .toInstant()))
                 .signWith(SignatureAlgorithm.HS512, loginResponse.getEmail())
                 .compact();

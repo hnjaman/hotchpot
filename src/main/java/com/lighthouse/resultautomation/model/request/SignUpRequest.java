@@ -11,8 +11,6 @@ import java.io.Serializable;
 
 @Data
 public class SignUpRequest implements Serializable {
-//    @NotEmpty(message = ErrorCode.INVALID_TOKEN)
-//    private String token;
     private String name;
     @Email(regexp = ApplicationConstants.VALID_EMAIL_ADDRESS_REGEX,message = ErrorCode.INVALID_EMAIL)
     private String email;
@@ -20,4 +18,6 @@ public class SignUpRequest implements Serializable {
     private String password;
     @NotNull(message = ErrorCode.USER_NAME_CANNOT_BE_EMPTY)
     private String userName;
+//    @NotEmpty(message = ErrorCode.INVALID_TOKEN)
+//    private String token;
 }

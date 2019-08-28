@@ -4,7 +4,7 @@ import com.lighthouse.resultautomation.model.User;
 import com.lighthouse.resultautomation.model.request.SignUpRequest;
 import com.lighthouse.resultautomation.model.response.LoginResponse;
 import com.lighthouse.resultautomation.model.response.TokenDTO;
-import com.lighthouse.resultautomation.repository.UserElasticRepository;
+//import com.lighthouse.resultautomation.repository.UserElasticRepository;
 import com.lighthouse.resultautomation.repository.UserRepository;
 import com.lighthouse.resultautomation.service.AuthService;
 import com.lighthouse.resultautomation.service.JwtTokenService;
