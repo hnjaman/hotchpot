@@ -1,5 +1,6 @@
 package com.lighthouse.resultautomation;
 
+import com.lighthouse.resultautomation.model.User;
 import com.lighthouse.resultautomation.repository.UserRepository;
 import com.lighthouse.resultautomation.service.AuthService;
 import org.junit.Test;
@@ -35,9 +36,21 @@ public class ResultAutomationApplicationTests {
 	@Test
 	public void getAllUserTest(){
 		HttpHeaders headers = new HttpHeaders();
-		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+		HttpEntity<String> entity = new HttpEntity<>(null, headers);
 		ResponseEntity<String> response = restTemplate.exchange(getRootUrl() + "/users",
 				HttpMethod.GET, entity, String.class);
 		Assert.notNull(response.getBody());
+	}
+
+	@Test
+	public void signUpTest() {
+		User user = new User();
+		user.setName("test");
+		user.setEmail("test@gmail.com");
+		user.setUserName("test");
+		user.setPassword("1234");
+		ResponseEntity<User> postResponse = restTemplate.postForEntity(getRootUrl() + "/signup", user, User.class);
+		Assert.notNull(postResponse);
+		Assert.notNull(postResponse.getBody());
 	}
 }
